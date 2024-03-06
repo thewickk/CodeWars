@@ -21,7 +21,7 @@ template <typename T> std::vector<T> uniqueInOrder(const std::vector<T>& iterabl
         auto cur = t;
         if (std::find(vec.begin(), vec.end(), cur) == vec.end())
         {
-            vec.push_back(t)
+            vec.push_back(t);
         }
     }
     return vec;
@@ -54,13 +54,9 @@ int main()
     std::vector<int> intHolder{};
     std::vector<char> charVec{};
     
-    for (const auto let : test1[0])
+    if (test1.size() > 1)
     {
-        char cur = let;
-        if (std::find(charVec.begin(), charVec.end(), cur) == charVec.end())
-        {
-            charVec.push_back(let);
-        }
+        for (auto iter = )
     }
 
     for (const auto let : charVec)
