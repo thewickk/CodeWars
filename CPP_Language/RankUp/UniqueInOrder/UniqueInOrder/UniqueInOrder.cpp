@@ -11,33 +11,70 @@ uniqueInOrder([1,2,2,3,3])       == {1,2,3}
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
+
+// MY SOLUTIONS //
 template <typename T> std::vector<T> uniqueInOrder(const std::vector<T>& iterable) {
     //uniqueInOrder("AAAABBBCCDAABBB")
 
     std::vector<T> vec{};
-    for (const auto t : vec)
+
+    T prev{};
+
+    for (const auto t : iterable)
     {
-        auto cur = t;
-        if (std::find(vec.begin(), vec.end(), cur) == vec.end())
+        if (t != prev)
         {
             vec.push_back(t);
         }
+
+        prev = t;
     }
     return vec;
 }
 std::vector<char> uniqueInOrder(const std::string& iterable) {
     std::vector<char> holder{};
     
+    char prev{};
     for (const auto let : iterable)
     {
-        char cur = let;
-        if (std::find(holder.begin(), holder.end(), cur) == holder.end())
+        if (let != prev)
         {
             holder.push_back(let);
         }
+        prev = let;
     }
     return holder;
+}
+// END MY SOLUTIONS //
+
+
+// Very clever solution: Requires the <algorithm> header
+template <typename T> std::vector<T> uniqueInOrder(const std::vector<T>& iterable) {
+    std::vector<T> res;
+
+    std::unique_copy(iterable.begin(), iterable.end(), std::back_inserter(res));
+    return res;
+}
+std::vector<char> uniqueInOrder(const std::string& iterable) {
+    std::vector<char> res;
+
+    std::unique_copy(iterable.begin(), iterable.end(), std::back_inserter(res));
+    return res;
+}
+
+// Another clever solution, this one doesn't require any additional headers
+template <typename T> std::vector<T> uniqueInOrder(const std::vector<T>& iterable) {
+    std::vector<T> result;
+    for (const auto& c : iterable) if (result.empty() || c != result.back()) result.push_back(c);
+    return result;
+}
+
+std::vector<char> uniqueInOrder(const std::string& iterable) {
+    std::vector<char> result;
+    for (auto c : iterable) if (result.empty() || c != result.back()) result.push_back(c);
+    return result;
 }
 
 
@@ -54,34 +91,22 @@ int main()
     std::vector<int> intHolder{};
     std::vector<char> charVec{};
     
-    if (test1.size() > 1)
-    {
-        for (auto iter = )
-    }
-
-    for (const auto let : charVec)
-    {
-        std::cout << let;
-    }
     
-    std::cout << "\n";
+    //charVec = uniqueInOrder("ABBCcAD");
 
-    for (const auto num : intTest1)
+    //for (const auto let : charVec)
+    //{
+    //    std::cout << let;
+    //}
+    //
+    //std::cout << "\n";
+
+    intHolder = uniqueInOrder(intTest1);
+
+    for (const auto i : intHolder)
     {
-        int curr = num;
-        if (std::find(intHolder.begin(), intHolder.end(), curr) == intHolder.end())
-        {
-            intHolder.push_back(num);
-        }
+        std::cout << i << ", " << std::endl;
     }
-
-    for (const auto num : intHolder)
-    {
-        std::cout << num;
-    }
-
-    
-
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
